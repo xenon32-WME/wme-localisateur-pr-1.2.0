@@ -1,0 +1,31 @@
+name: Contrôles du Localisateur PR public 1.2.0
+
+on:
+  push:
+    branches:
+      - main
+      - 'feat/**'
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  public-candidate:
+    name: Syntaxe et garde-fous de la candidate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntaxe du userscript
+        run: node --check src/WME-Localisateur-de-PR-France-v1.2.0.user.js
+      - name: Garde-fous de publication
+        run: node tests/public-candidate-check.cjs
+      - name: Sources et interface France
+        run: node tests/france-sources-and-ui.cjs
+      - name: SDK asynchrone — régression
+        run: node tests/strict-async-sdk-startup.cjs
+
+# Aucun déploiement, publication GreasyFork ou accès à une API privée.
