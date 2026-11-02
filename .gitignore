@@ -1,0 +1,20 @@
+# Dépendances et artefacts locaux
+node_modules/
+coverage/
+dist/
+*.zip
+*.log
+
+# Configuration locale et secrets : ne jamais committer
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Système / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
